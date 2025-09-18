@@ -33,18 +33,18 @@
 
 ## 🧭 Architecture
 
-User → Next.js UI → Server Actions → Prisma/Postgres
-↓
-Inngest Queue
-↓ (HTTP fetch with Modal keys)
-Modal GPU Backend (FastAPI)
-┌──────────────┬───────────────┬───────────────┐
-│ ACE-Step │ Qwen2-7B LLM │ SDXL Turbo │
-└──────────────┴───────────────┴───────────────┘
-↓
-AWS S3 (Audio + Artwork)
-↓
-Feed, Player, Dashboard
+    User → Next.js UI → Server Actions → Prisma/Postgres
+    ↓
+    Inngest Queue
+    ↓ (HTTP fetch with Modal keys)
+    Modal GPU Backend (FastAPI)
+    ┌──────────────┬───────────────┬───────────────┐
+    │ ACE-Step │ Qwen2-7B LLM │ SDXL Turbo │
+    └──────────────┴───────────────┴───────────────┘
+    ↓
+    AWS S3 (Audio + Artwork)
+    ↓
+    Feed, Player, Dashboard
 
 ---
 - Frontend: Next.js 15 (App Router), Tailwind CSS, shadcn/ui.
