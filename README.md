@@ -1,85 +1,3 @@
-# generaqte downloadable correctly readme code for this
-
-# Music Generator SaaS
-
-<p align="center">
-  <img src="thumbnail.png" alt="Music Generator Thumbnail" width="320" />
-</p>
-<p align="center">
-  <a href="https://github.com/sh-arka22/music-generator/actions">
-    <img alt="CI status" src="https://img.shields.io/github/actions/workflow/status/sh-arka22/music-generator/ci.yml?logo=github">
-  </a>
-  <a href="https://github.com/sh-arka22/music-generator/blob/main/LICENSE.MD">
-    <img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg">
-  </a>
-  <a href="https://modal.com/">
-    <img alt="Built with Modal" src="https://img.shields.io/badge/Built%20with-Modal-000">
-  </a>
-</p>
-> A full-stack AI music creation platform by
-> <a href="https://github.com/sh-arka22">Arka Jyoti Saha</a>, combining state-of-the-art generative audio, LLM-assisted songwriting, GPU-backed serverless execution, and a polished Next.js experience.
----
-## Table of Contents
-
-- [Highlights](#-highlights)
-- [System Architecture](#-system-architecture)
-- [Directory Structure](#-directory-structure)
-- [Tech Stack](#-tech-stack)
-- [Quick Start](#-quick-start)
-    - [Backend (Modal)](#2-backend-modal)
-    - [Frontend (Nextjs)](#3-frontend-nextjs)
-    - [Queue Worker (Inngest)](#4-queue-worker-inngest)
-- [Configuration](#-configuration)
-    - [Environment Variables](#environment-variables)
-    - [AWS S3 Setup](#aws-s3-setup)
-    - [Database (Neon + Prisma)](#database-neon--prisma)
-    - [Modal Setup](#modal-setup)
-    - [Inngest Setup](#inngest-setup)
-- [Generation Modes \& API](#-generation-modes--api)
-- [Processing Pipeline](#-processing-pipeline)
-- [Deployment \& Ops](#-deployment--ops)
-- [Security \& Privacy](#-security--privacy)
-- [Troubleshooting](#-troubleshooting)
-- [FAQ](#-faq)
-- [Roadmap](#-roadmap)
-- [Contributing](#-contributing)
-- [Maintainer](#-maintainer)
-- [License](#license)
----
-## ✨ Highlights
-
-- **ACE-Step diffusion audio model** for high-fidelity music synthesis.
-- **Qwen2-7B-Instruct** powers prompt expansion, lyric writing, and auto-tagging.
-- **SDXL Turbo** generates album-ready artwork on the fly.
-- **Modal GPU functions** keep inference scalable without server management.
-- **Next.js 15 + BetterAuth** deliver a production-ready SaaS front end and auth.
-- **Credit-based monetization** via Polar checkout \& customer portal.
-- **Inngest queue** gives smooth background processing and reliable orchestration.
-- **AWS S3 integration** for song storage, streaming, and thumbnail delivery.
----
-## 🏗️ System Architecture
-
-```text
-User → Next.js UI (App Router) → Server Actions → Prisma/Postgres (Neon)
-                               │
-                               ▼
-                         Inngest Queue
-                               │      (Modal webhook)
-                               ▼
-                       Modal GPU Backend (FastAPI)
-            ┌──────────────┬───────────────┬───────────────┐
-            │   ACE-Step   │  Qwen2-7B LLM │   SDXL Turbo  │
-            └──────────────┴───────────────┴───────────────┘
-                               │
-                               ▼
-                            AWS S3
-                               │
-                               ▼
-                       Song Feed & Player
-
-Looking at your Music Generator SaaS README, I'll provide you with a complete, well-formatted version that includes all the sections from your table of contents. Here's the downloadable README code:
-
-```markdown
 # Music Generator SaaS
 
 <p align="center">
@@ -87,442 +5,332 @@ Looking at your Music Generator SaaS README, I'll provide you with a complete, w
 </p>
 
 <p align="center">
-  <a href="https://github.com/sh-arka22/music-generator/actions">
-    <img alt="CI status" src="https://img.shields.io/github/actions/workflow/status/sh-arka22/music-generator/ci.yml?logo=github">
-  </a>
-  <a href="https://github.com/sh-arka22/music-generator/blob/main/LICENSE.MD">
-    <img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg">
-  </a>
-  <a href="https://modal.com/">
-    <img alt="Built with Modal" src="https://img.shields.io/badge/Built%20with-Modal-000">
-  </a>
+  <a href="https://github.com/sh-arka22/music-generator/stargazers"><img src="https://img.shields.io/github/stars/sh-arka22/music-generator?style=social" alt="GitHub Stars"></a>
+  <a href="https://github.com/sh-arka22/music-generator/issues"><img src="https://img.shields.io/github/issues/sh-arka22/music-generator" alt="GitHub Issues"></a>
+  <a href="https://github.com/sh-arka22/music-generator/blob/main/LICENSE.MD"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
+  <a href="https://modal.com/"><img src="https://img.shields.io/badge/Built%20with-Modal-000" alt="Built with Modal"></a>
 </p>
 
-> A full-stack AI music creation platform by <a href="https://github.com/sh-arka22">Arka Jyoti Saha</a>, combining state-of-the-art generative audio, LLM-assisted songwriting, GPU-backed serverless execution, and a polished Next.js experience.
+> A full‑stack AI music creation platform by [Arka Jyoti Saha](https://github.com/sh-arka22): generate original songs from descriptions, prompts, or lyrics with GPU‑backed inference, LLM‑assisted songwriting, and a polished Next.js SaaS experience.
+
+- Demo video: https://youtu.be/fC3_Luf7wVA
 
 ---
 
-## Table of Contents
-- [✨ Highlights](#-highlights)
-- [🏗️ System Architecture](#️-system-architecture)
-- [📁 Directory Structure](#-directory-structure)
-- [🛠️ Tech Stack](#️-tech-stack)
-- [🚀 Quick Start](#-quick-start)
-  - [Backend (Modal)](#backend-modal)
-  - [Frontend (Next.js)](#frontend-nextjs)
-  - [Queue Worker (Inngest)](#queue-worker-inngest)
-- [⚙️ Configuration](#️-configuration)
-  - [Environment Variables](#environment-variables)
-  - [AWS S3 Setup](#aws-s3-setup)
-  - [Database (Neon + Prisma)](#database-neon--prisma)
-  - [Modal Setup](#modal-setup)
-  - [Inngest Setup](#inngest-setup)
-- [🎵 Generation Modes & API](#-generation-modes--api)
-- [⚡ Processing Pipeline](#-processing-pipeline)
-- [🚀 Deployment & Ops](#-deployment--ops)
-- [🔒 Security & Privacy](#-security--privacy)
-- [🛠️ Troubleshooting](#️-troubleshooting)
-- [❓ FAQ](#-faq)
-- [🗺️ Roadmap](#️-roadmap)
-- [🤝 Contributing](#-contributing)
-- [👨‍💻 Maintainer](#-maintainer)
-- [📄 License](#-license)
+## ✨ Features
+
+- Music synthesis with ACE-Step diffusion (text → full track).
+- LLM‑assisted prompts, lyrics, and auto‑categorization via Qwen2‑7B-Instruct.
+- Album artwork generation with SDXL Turbo.
+- Modal serverless GPU for scalable, production‑ready inference.
+- Credit‑based billing using Polar checkout & customer portal.
+- Background processing with Inngest queues, per‑user concurrency control.
+- S3 storage for audio/cover images and secure presigned playback.
+- Auth, sessions, and Prisma/Postgres data model with BetterAuth.
+- Community feed, likes, categories, and personal dashboard.
 
 ---
 
-## ✨ Highlights
+## 🧭 Architecture
 
-- **ACE-Step diffusion audio model** for high-fidelity music synthesis
-- **Qwen2-7B-Instruct** powers prompt expansion, lyric writing, and auto-tagging
-- **SDXL Turbo** generates album-ready artwork on the fly
-- **Modal GPU functions** keep inference scalable without server management
-- **Next.js 15 + BetterAuth** deliver a production-ready SaaS front end and auth
-- **Credit-based monetization** via Polar checkout & customer portal
-- **Inngest queue** gives smooth background processing and reliable orchestration
-- **AWS S3 integration** for song storage, streaming, and thumbnail delivery
-
----
-
-## 🏗️ System Architecture
-
-```
-
-User → Next.js UI (App Router) → Server Actions → Prisma/Postgres (Neon)
-│
-▼
+User → Next.js UI → Server Actions → Prisma/Postgres
+↓
 Inngest Queue
-│      (Modal webhook)
-▼
+↓ (HTTP fetch with Modal keys)
 Modal GPU Backend (FastAPI)
 ┌──────────────┬───────────────┬───────────────┐
-│   ACE-Step   │  Qwen2-7B LLM │   SDXL Turbo  │
+│ ACE-Step │ Qwen2-7B LLM │ SDXL Turbo │
 └──────────────┴───────────────┴───────────────┘
-│
-▼
-AWS S3
-│
-▼
-Song Feed \& Player
+↓
+AWS S3 (Audio + Artwork)
+↓
+Feed, Player, Dashboard
 
-```
 
-## 📁 Directory Structure
+- Frontend: Next.js 15 (App Router), Tailwind CSS, shadcn/ui.
+- Backend: Python + FastAPI on Modal (GPU: `L40S`).
+- Models: ACE-Step (music), Qwen2-7B (LLM), SDXL Turbo (image).
+- Orchestration: Inngest events with per‑user concurrency limit = 1.
+- Data: Prisma ORM + Postgres (Neon or local Docker).
+- Storage: AWS S3 for audio `.wav` and thumbnails `.png`.
 
-```
+---
 
-music-generator/
-├── frontend/                 \# Next.js 15 application
-│   ├── app/                 \# App Router pages
-│   ├── components/          \# Reusable UI components
-│   ├── lib/                 \# Utilities and configurations
-│   └── prisma/              \# Database schema and migrations
-├── backend/                 \# Modal serverless functions
-│   ├── models/              \# AI model configurations
-│   ├── api/                 \# FastAPI endpoints
-│   └── workers/             \# Background job handlers
-├── inngest/                 \# Queue processing functions
-│   └── functions/           \# Event-driven workflows
-└── docs/                    \# Documentation
+## 🧰 Tech Stack
 
-```
+| Layer          | Tools / Services                                               |
+| -------------- | -------------------------------------------------------------- |
+| Frontend       | Next.js 15, React 18, TypeScript, Tailwind CSS, shadcn/ui      |
+| Auth & Billing | BetterAuth, Polar (checkout, portal, webhooks)                 |
+| Backend        | Python 3.12, FastAPI, Modal serverless GPU                     |
+| AI Models      | ACE-Step, Qwen2-7B-Instruct, SDXL Turbo                        |
+| Orchestration  | Inngest (event-driven jobs)                                    |
+| Storage        | AWS S3 (audio, thumbnails), Prisma/Postgres (Neon or Docker)   |
+| Tooling        | Prisma, ESLint/Prettier, Modal CLI, Inngest CLI                |
 
-## 🛠️ Tech Stack
+---
 
-### Frontend
-- **Next.js 15** - React framework with App Router
-- **TypeScript** - Type-safe development
-- **Tailwind CSS** - Utility-first styling
-- **BetterAuth** - Authentication and session management
-- **Prisma** - Database ORM
-- **React Hook Form** - Form handling
+## 📂 Repository Layout
 
-### Backend
-- **Modal** - Serverless GPU computing platform
-- **FastAPI** - High-performance Python web framework
-- **ACE-Step** - Advanced audio diffusion model
-- **Qwen2-7B-Instruct** - Large language model for text generation
-- **SDXL Turbo** - Fast image generation model
+backend/
+main.py # FastAPI endpoints on Modal; loads models; S3 uploads
+prompts.py # LLM prompt templates for prompts/lyrics
+requirements.txt # Python deps (diffusers, transformers, boto3, modal, etc.)
+frontend/
+prisma/schema.prisma # Postgres models (User, Song, Category, Like, etc.)
+src/
+app/ # Next.js routes (auth, main feed, create, etc.)
+actions/ # Server actions (generate, play, presigned URLs)
+inngest/ # Inngest client + job function (generate-song)
+lib/auth.ts # BetterAuth + Polar integration (credits)
+env.js # Env validation schema
+start-database.sh # Local Postgres Docker helper (optional)
+README.md
+LICENSE.MD
 
-### Infrastructure
-- **Neon** - Serverless Postgres database
-- **AWS S3** - Object storage for audio files
-- **Inngest** - Reliable background job processing
-- **Vercel** - Frontend deployment platform
+
+---
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Node.js 18+ and npm/yarn
-- Python 3.9+
-- Modal account and CLI
-- AWS account with S3 access
-- Neon database
+### 1) Clone
 
-### 1. Clone Repository
-
-```
-
-git clone https://github.com/sh-arka22/music-generator.git
+```bash
+git clone --recurse-submodules https://github.com/sh-arka22/music-generator.git
 cd music-generator
 
-```
-
-### 2. Backend (Modal)
-
-```
+2) Backend (Modal)
+Prereqs: Python 3.12+, Modal CLI (pip install modal), an AWS IAM user with S3 access.
 
 cd backend
-pip install modal
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
 modal setup
+Set up Modal secrets (used by @app.cls(..., secrets=[music_gen_secrets]) in backend/main.py):
 
-# Deploy Modal functions
+modal secret create music-gen-secret \
+  S3_BUCKET_NAME=your-s3-bucket-name \
+  AWS_ACCESS_KEY_ID=... \
+  AWS_SECRET_ACCESS_KEY=... \
+  AWS_REGION=us-east-1
 
-modal deploy api.py
-modal deploy workers.py
+Test locally on Modal:
 
-```
+modal run main.py
+Deploy endpoints (returns HTTPS URLs in the Modal dashboard):
 
-### 3. Frontend (Next.js)
+modal deploy main.py
+Notes:
 
-```
+Models cached to named volumes: ace-step-models (ACE-Step), qwen-hf-cache (Hugging Face).
+The backend clones ACE-Step during image build and installs it:
+git clone https://github.com/ace-step/ACE-Step.git /tmp/ACE-Step && pip install .
+3) Frontend (Next.js)
+Prereqs: Node 18+, npm.
 
 cd frontend
+cp .env.example .env   # create if you don't have one; see below
 npm install
-
-# Set up environment variables
-
-cp .env.example .env.local
-
-# Run database migrations
-
-npx prisma db push
-npx prisma generate
-
-# Start development server
-
 npm run dev
+Populate .env per src/env.js (server env). Required keys:
 
-```
+BETTER_AUTH_SECRET=                       # random 32+ chars
+DATABASE_URL=postgresql://user:pass@host:port/db
+NODE_ENV=development
 
-### 4. Queue Worker (Inngest)
+# Modal auth for calling backend endpoints
+MODAL_KEY=...
+MODAL_SECRET=...
 
-```
+# AWS access for presigned URL generation (frontend server only)
+AWS_ACCESS_KEY_ID=...
+AWS_SECRET_ACCESS_KEY_ID=...
+AWS_REGION=us-east-1
+S3_BUCKET_NAME=your-s3-bucket-name
 
-cd inngest
-npm install
+# Modal FastAPI endpoints from modal deploy output
+GENERATE_FROM_DESCRIPTION=https://<modal-url>/generate_from_description
+GENERATE_FROM_DESCRIBED_LYRICS=https://<modal-url>/generate_with_described_lyrics
+GENERATE_WITH_LYRICS=https://<modal-url>/generate_with_lyrics
 
-# Start Inngest dev server
-
-npx inngest-cli dev
-
-```
-
-## ⚙️ Configuration
-
-### Environment Variables
-
-Create a `.env.local` file in the frontend directory:
-
-```
+# Polar billing
+POLAR_ACCESS_TOKEN=...
+POLAR_WEBHOOK_SECRET=...
 
 
-# Database
+# In frontend/
+./start-database.sh   # reads DATABASE_URL in .env and starts Docker postgres
+npx prisma migrate dev
 
-DATABASE_URL="postgresql://username:password@host/database"
 
-# Authentication
+cd frontend
+npx inngest-cli@latest dev
 
-BETTERAUTH_SECRET="your-auth-secret"
-BETTERAUTH_URL="http://localhost:3000"
 
-# AWS S3
 
-AWS_ACCESS_KEY_ID="your-access-key"
-AWS_SECRET_ACCESS_KEY="your-secret-key"
-AWS_REGION="us-east-1"
-AWS_S3_BUCKET="your-bucket-name"
+🔌 API (Modal Backend)
+All endpoints require headers:
 
-# Modal
+Content-Type: application/json
+Modal-Key: ${MODAL_KEY}
+Modal-Secret: ${MODAL_SECRET}
+Shared defaults (backend AudioGenerationBase):
 
-MODAL_TOKEN_ID="your-modal-token-id"
-MODAL_TOKEN_SECRET="your-modal-token-secret"
+audio_duration: float = 180.0
+seed: int = -1
+guidance_scale: float = 15.0
+infer_step: int = 60
+instrumental: bool = False
+1) POST /generate_from_description
 
-# Inngest
 
-INNGEST_EVENT_KEY="your-inngest-event-key"
-INNGEST_SIGNING_KEY="your-inngest-signing-key"
+1) POST /generate_from_description
+Body:
 
-# Polar (Payments)
-
-POLAR_ACCESS_TOKEN="your-polar-token"
-POLAR_WEBHOOK_SECRET="your-webhook-secret"
-
-```
-
-### AWS S3 Setup
-
-1. Create an S3 bucket for audio storage
-2. Configure CORS policy:
-
-```
-
-[
 {
-"AllowedHeaders": ["*"],
-"AllowedMethods": ["GET", "PUT", "POST", "DELETE", "HEAD"],
-"AllowedOrigins": ["*"],
-"ExposeHeaders": ["ETag"]
+  "full_described_song": "an 80s-inspired synthwave ballad about neon lights",
+  "audio_duration": 180,
+  "seed": -1,
+  "guidance_scale": 15,
+  "infer_step": 60,
+  "instrumental": false
 }
-]
+Response:
 
-```
-
-3. Set up IAM user with S3 permissions
-
-### Database (Neon + Prisma)
-
-1. Create a Neon database
-2. Update `DATABASE_URL` in environment variables
-3. Run migrations:
-
-```
-
-npx prisma db push
-npx prisma generate
-
-```
-
-### Modal Setup
-
-1. Install Modal CLI: `pip install modal`
-2. Authenticate: `modal setup`
-3. Deploy functions: `modal deploy`
-
-### Inngest Setup
-
-1. Create Inngest account
-2. Set up webhook endpoints
-3. Configure event keys in environment variables
-
-## 🎵 Generation Modes & API
-
-### Music Generation Endpoints
-
-#### Generate Music
-```
-
-POST /api/generate
 {
-"prompt": "Upbeat electronic dance music",
-"duration": 30,
-"genre": "electronic",
-"mood": "energetic"
+  "s3_key": "generated-audio.wav",
+  "cover_image_s3_key": "cover.png",
+  "categories": ["Synthwave", "80s", "Electronic"]
 }
+Behavior:
 
-```
+Qwen reformats the description into ACE-Step prompt tags.
+Qwen generates full lyrics (unless instrumental is true).
+ACE-Step synthesizes audio to .wav.
+SDXL Turbo generates cover art.
+Both are uploaded to S3; categories auto‑extracted by Qwen.
 
-#### Generate Lyrics
-```
+2) POST /generate_with_lyrics
+Body:
 
-POST /api/lyrics
 {
-"theme": "summer vibes",
-"genre": "pop",
-"mood": "happy"
+  "prompt": "melodic techno, 124 bpm, minor key, synthesizer, driving",
+  "lyrics": "[verse]\n...\n[chorus]\n...",
+  "audio_duration": 180,
+  "guidance_scale": 15,
+  "infer_step": 60,
+  "instrumental": false
 }
+Response: same as above (S3 keys + categories). Categories inferred from prompt.
 
-```
+3) POST /generate_with_described_lyrics
+Body:
 
-#### Generate Album Art
-```
-
-POST /api/artwork
 {
-"prompt": "Cosmic space theme",
-"style": "digital art",
-"colors": ["blue", "purple", "pink"]
+  "prompt": "rave, funk, 140 bpm, disco",
+  "described_lyrics": "lyrics about water bottles",
+  "audio_duration": 180,
+  "guidance_scale": 15,
+  "infer_step": 60,
+  "instrumental": false
 }
+Behavior:
 
-```
-
-## ⚡ Processing Pipeline
-
-1. **User Input** - Prompt submission through Next.js UI
-2. **Queue Processing** - Inngest handles background jobs
-3. **AI Generation** - Modal executes GPU-intensive tasks
-4. **Storage** - Generated content uploaded to S3
-5. **Notification** - User receives completion webhook
-6. **Playback** - Streaming through optimized player
-
-## 🚀 Deployment & Ops
-
-### Production Deployment
-
-1. **Frontend** - Deploy to Vercel:
-```
-
-vercel --prod
-
-```
-
-2. **Backend** - Deploy Modal functions:
-```
-
-modal deploy --env production
-
-```
-
-3. **Database** - Neon automatically scales
-
-### Monitoring
-
-- Modal dashboard for GPU function metrics
-- Inngest dashboard for queue monitoring
-- Vercel analytics for frontend performance
-
-## 🔒 Security & Privacy
-
-- User authentication via BetterAuth
-- Secure API endpoints with rate limiting
-- S3 presigned URLs for secure file access
-- No audio data stored locally on devices
-- GDPR-compliant data handling
-
-## 🛠️ Troubleshooting
-
-### Common Issues
-
-**Modal Function Timeout**
-```
+Qwen expands described_lyrics into fully structured lyrics.
+ACE-Step + SDXL as above.
 
 
-# Increase timeout in Modal function decorator
+4) POST /generate (demo)
+Returns base64‑encoded audio (quick sanity check).
 
-@modal.function(timeout=300)
+🧠 Generation Modes (UI)
+The UI will create two jobs per request with guidance scales 7.5 and 15 to offer variety. Inngest enforces a one‑at‑a‑time concurrency per user to prevent overload.
 
-```
+Custom (Prompt + Lyrics)
+Prompt + Described Lyrics (LLM expands)
+Full Description (LLM derives both prompt and lyrics)
+Instrumental toggle forces [instrumental] lyrics
+📦 Data Model (Prisma)
+Key models:
 
-**Database Connection Issues**
-```
+User: credits balance, sessions, songs, likes
+Song: status (queued → processing → processed or failed), metadata (prompt/lyrics), S3 keys, categories, listen count
+Category: names connected via connectOrCreate
+Like: user-song pairs
+See: frontend/prisma/schema.prisma
 
 
-# Reset database connection
 
-npx prisma db push --force-reset
+☁️ AWS Setup
+Frontend user policy (example):
 
-```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    { "Effect": "Allow", "Action": ["s3:PutObject", "s3:GetObject"], "Resource": "arn:aws:s3:::your-s3-bucket-name/*" },
+    { "Effect": "Allow", "Action": "s3:ListBucket", "Resource": "arn:aws:s3:::your-s3-bucket-name" }
+  ]
+}
+Backend user policy (example):
 
-**S3 Upload Failures**
-- Check AWS credentials and permissions
-- Verify bucket CORS configuration
-- Ensure sufficient S3 storage quota
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    { "Effect": "Allow", "Action": "s3:GetObject", "Resource": "arn:aws:s3:::your-s3-bucket-name/*" },
+    { "Effect": "Allow", "Action": "s3:ListBucket", "Resource": "arn:aws:s3:::your-s3-bucket-name" }
+  ]
+}
+Replace your-s3-bucket-name accordingly. Set S3_BUCKET_NAME in Modal secret and frontend .env.
 
-## ❓ FAQ
+💳 Billing & Credits
+BetterAuth + Polar plugin manage customers, checkout, and webhooks.
+On successful purchase, credits are incremented based on product ID.
+Each successful generation deducts 1 credit.
+See: frontend/src/lib/auth.ts
 
-**Q: How long does music generation take?**
-A: Typically 30-60 seconds for a 30-second track, depending on complexity.
+🧪 Development Tips
+Modal:
+GPU type configured at backend/main.py: @app.cls(gpu="L40S").
+If GPU quota is unavailable, change to an available GPU or region.
+HuggingFace cache:
+Cached into /.cache/huggingface (mounted volume qwen-hf-cache).
+ACE-Step pipeline:
+Initialized with checkpoint_dir="/models" (mounted volume ace-step-models).
+Prisma:
+npx prisma generate and npx prisma migrate dev as needed.
+Inngest:
+Local dev server echoes logs and failures; production deploy optional.
 
-**Q: What audio formats are supported?**
-A: Generated music is provided in MP3 and WAV formats.
+🐛 Troubleshooting
+403/AccessDenied on S3:
+Verify bucket name, region, IAM policies, and Modal secret values.
+401 calling Modal endpoints:
+Ensure MODAL_KEY and MODAL_SECRET are correct and passed in headers.
+Modal deployment succeeds but models fail to load:
+Check GPU availability; ensure volumes are named exactly as in code.
+Inngest job stuck in “queued”:
+Run npx inngest-cli@latest dev locally; check logs and endpoint URLs.
+Database connection errors:
+Validate DATABASE_URL; if using local Docker, ensure port isn’t taken. Use ./start-database.sh.
+🗺️ Roadmap
+User controls for duration, tempo, voice/style presets.
+Waveform previews, social sharing, and embeds.
+Lyrics moderation and quality filters.
+Playlists, follows, and collaborative sessions.
+Export stems and multitrack mixing.
+🤝 Contributing
+Fork and clone the repo.
+Create a feature branch: git checkout -b feat/amazing-idea.
+Keep changes focused; run formatters and type checks.
+Open a PR and tag @sh-arka22.
 
-**Q: Can I use generated music commercially?**
-A: Yes, all generated content is royalty-free for commercial use.
+📝 License
+MIT — see @LICENSE.MD.
 
-## 🗺️ Roadmap
+🙏 Acknowledgements
+ACE-Step authors and contributors
+Qwen team for Qwen2‑7B‑Instruct
+Stability AI for SDXL Turbo
+Modal, Inngest, Prisma, Neon, BetterAuth, and Polar for excellent tooling
 
-- [ ] Real-time collaboration features
-- [ ] Advanced audio effects and mixing
-- [ ] Mobile app development
-- [ ] Integration with music streaming platforms
-- [ ] AI-powered mastering and post-production
-- [ ] Multi-language support for lyrics
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## 👨‍💻 Maintainer
-
-**Arka Jyoti Saha**
-- GitHub: [@sh-arka22](https://github.com/sh-arka22)
-- Email: contact@arkasaha.dev
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE.MD](LICENSE.MD) file for details.
-
----
-
-<p align="center">
-  Made with ❤️ by <a href="https://github.com/sh-arka22">Arka Jyoti Saha</a>
-</p>
-```
-
-This README provides a comprehensive overview of your Music Generator SaaS project with proper markdown formatting, detailed sections, and clear instructions. You can copy this code and save it as `README.md` in your project root directory. The structure includes all the sections you referenced in your table of contents with practical information for users and contributors.
 
