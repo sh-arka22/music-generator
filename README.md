@@ -59,21 +59,21 @@
 
 ## 📂 Repository Layout
 
-backend/
-main.py # FastAPI endpoints on Modal; loads models; S3 uploads
-prompts.py # LLM prompt templates for prompts/lyrics
-requirements.txt # Python deps (diffusers, transformers, boto3, modal, etc.)
-frontend/
-prisma/schema.prisma # Postgres models (User, Song, Category, Like, etc.)
-src/
-app/ # Next.js routes (auth, main feed, create, etc.)
-actions/ # Server actions (generate, play, presigned URLs)
-inngest/ # Inngest client + job function (generate-song)
-lib/auth.ts # BetterAuth + Polar integration (credits)
-env.js # Env validation schema
-start-database.sh # Local Postgres Docker helper (optional)
-README.md
-LICENSE.MD
+    backend/
+    main.py # FastAPI endpoints on Modal; loads models; S3 uploads
+    prompts.py # LLM prompt templates for prompts/lyrics
+    requirements.txt # Python deps (diffusers, transformers, boto3, modal, etc.)
+    frontend/
+    prisma/schema.prisma # Postgres models (User, Song, Category, Like, etc.)
+    src/
+    app/ # Next.js routes (auth, main feed, create, etc.)
+    actions/ # Server actions (generate, play, presigned URLs)
+    inngest/ # Inngest client + job function (generate-song)
+    lib/auth.ts # BetterAuth + Polar integration (credits)
+    env.js # Env validation schema
+    start-database.sh # Local Postgres Docker helper (optional)
+    README.md
+    LICENSE.MD
 
 
 ---
