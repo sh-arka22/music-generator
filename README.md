@@ -46,7 +46,7 @@ AWS S3 (Audio + Artwork)
 ↓
 Feed, Player, Dashboard
 
-
+---
 - Frontend: Next.js 15 (App Router), Tailwind CSS, shadcn/ui.
 - Backend: Python + FastAPI on Modal (GPU: `L40S`).
 - Models: ACE-Step (music), Qwen2-7B (LLM), SDXL Turbo (image).
