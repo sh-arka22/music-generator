@@ -1,19 +1,6 @@
 # Music Generator SaaS
 
-<p align="center">
-  <img src="thumbnail.png" alt="Music Generator Thumbnail" width="320" />
-</p>
-
-<p align="center">
-  <a href="https://github.com/sh-arka22/music-generator/stargazers"><img src="https://img.shields.io/github/stars/sh-arka22/music-generator?style=social" alt="GitHub Stars"></a>
-  <a href="https://github.com/sh-arka22/music-generator/issues"><img src="https://img.shields.io/github/issues/sh-arka22/music-generator" alt="GitHub Issues"></a>
-  <a href="https://github.com/sh-arka22/music-generator/blob/main/LICENSE.MD"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
-  <a href="https://modal.com/"><img src="https://img.shields.io/badge/Built%20with-Modal-000" alt="Built with Modal"></a>
-</p>
-
-> A full‑stack AI music creation platform by [Arka Jyoti Saha](https://github.com/sh-arka22): generate original songs from descriptions, prompts, or lyrics with GPU‑backed inference, LLM‑assisted songwriting, and a polished Next.js SaaS experience.
-
-- Demo video: https://youtu.be/fC3_Luf7wVA
+> A full‑stack AI music creation platform: generates original songs from descriptions, prompts, or lyrics with GPU‑backed inference, LLM‑assisted songwriting, and a polished Next.js SaaS experience.
 
 ---
 
